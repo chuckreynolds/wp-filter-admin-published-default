@@ -32,8 +32,8 @@ function rkv_filter_admin_published_default() {
 	// call global submenu item
 	global $submenu;
 	
-	// post types to filter, add more post types here
-	$post_types = array('page');
+	// post types to filter
+	$post_types = apply_filters('rkv_filter_post_types', array('page'));
 
 	// edit main link for posts
 	$submenu['edit.php'][5][2] = 'edit.php?post_status=publish';
