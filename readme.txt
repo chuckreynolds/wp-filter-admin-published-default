@@ -4,15 +4,15 @@ Donate link:
 Tags: wordpress, admin, published, edit link, posts edit, pages edit
 Requires at least: 3.8
 Tested up to: 4.0
-Stable tag: 1.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Enables the Pages and Posts links in admin to show the Published filter by default
+Enables the post type links (posts, pages, etc) in admin to show the Published filter by default
 
 == Description ==
 
-Enables the Pages and Posts links in admin to show the Published filter by default.
+Enables the post type links (posts, pages, etc) links in admin to show the Published filter by default.
 Came out of a need as clients have a lot of pre-scheduled posts so a LOT of drafts are up
 top and I got tired of the extra click. Tweeted for ideas, @Norcross answered and whipped
 this function up quick.
@@ -33,6 +33,11 @@ Installing "Filter Admin Published Default" can be done either by searching for 
 1. How do it work? Just install, activate and you're good!
 
 == Changelog ==
+
+= 1.0.1 =
+* 2014-09-25
+* Expanded to include all public post types excluding attachments (media)
+* Adds `rkv_admin_publish_link_types` filter to add / remove types
 
 = 1.0 =
 * 2014-07-28
