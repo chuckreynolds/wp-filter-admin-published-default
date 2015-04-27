@@ -3,8 +3,8 @@ Contributors: ryno267, norcross
 Donate link:
 Tags: wordpress, admin, published, edit link, posts edit, pages edit
 Requires at least: 3.8
-Tested up to: 4.0
-Stable tag: 1.0.1
+Tested up to: 4.2
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -33,6 +33,9 @@ Installing "Filter Admin Published Default" can be done either by searching for 
 1. How do it work? Just install, activate and you're good!
 
 == Changelog ==
+
+= 1.1 =
+* tested to wp 4.2
 
 = 1.0.1 =
 * 2014-09-25

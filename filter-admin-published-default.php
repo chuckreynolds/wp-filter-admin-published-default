@@ -1,13 +1,13 @@
 <?php
 /*
 Plugin Name: Filter Admin Published Default
-Version: 1.0.1
-Plugin URI: https://gist.github.com/chuckreynolds/0fa3af52462b5929e74d
+Version: 1.1
+Plugin URI: https://wordpress.org/plugins/filter-admin-published-default/
 Description: Enables the Pages and Posts links in admin to show the Published filter by default
 Author: Pigs Eating Hotdogs
 Author URI: https://github.com/chuckreynolds/wp-filter-admin-published-default
 Requires at least: 3.8
-Tested up to: 4.0
+Tested up to: 4.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
