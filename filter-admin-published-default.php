@@ -1,32 +1,19 @@
 <?php
-/*
-Plugin Name: Filter Admin Published Default
-Version: 1.1
-Plugin URI: https://wordpress.org/plugins/filter-admin-published-default/
-Description: Enables the Pages and Posts links in admin to show the Published filter by default
-Author: Pigs Eating Hotdogs
-Author URI: https://github.com/chuckreynolds/wp-filter-admin-published-default
-Requires at least: 3.8
-Tested up to: 4.8.1
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+/**
+ * Plugin Name:  Filter Admin Published Default
+ * Plugin URI:   https://wordpress.org/plugins/filter-admin-published-default/
+ * Description:  Enables all public post types (posts, pages, etc) in wp-admin to show the Published filter by default.
+ * Version:      1.2
+ * Author:       Pigs Eating Hotdogs
+ * Author URI:   https://github.com/chuckreynolds/wp-filter-admin-published-default
+ * License:      GPL-2.0+
+ * License URI:  http://www.gnu.org/licenses/gpl-2.0.txt
+ * Text Domain:  filter-admin-published-default
+ */
 
-Copyright 2014 Internet
+// If this file is called directly, abort.
+defined( 'ABSPATH' ) or die;
 
-This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License, version 2, as
-published by the Free Software Foundation.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
-*/
-add_action ( 'admin_menu', 'rkv_filter_admin_published_default', 20 );
 /**
  * change the default URL for post types
  * to only show published items
@@ -62,6 +49,7 @@ function rkv_filter_admin_published_default() {
 	}
 
 }
+add_action ( 'admin_menu', 'rkv_filter_admin_published_default', 20 );
 
 /**
  * fetch all public post types and filter
