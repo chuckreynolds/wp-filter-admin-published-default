@@ -1,82 +1,85 @@
 <?php
 /**
- * Plugin Name:  Filter Admin Published Default
- * Plugin URI:   https://wordpress.org/plugins/filter-admin-published-default/
- * Description:  Enables all public post types (posts, pages, etc) in wp-admin to show the Published filter by default.
- * Version:      1.3
- * Author:       Pigs Eating Hotdogs
- * Author URI:   https://github.com/chuckreynolds/wp-filter-admin-published-default
- * License:      GPL-2.0+
- * License URI:  http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain:  filter-admin-published-default
+ * Filter Admin Published Default
+ *
+ * @package           Filter_Admin_Published_Default
+ * @author            Chuck Reynolds
+ * @link              https://chuckreynolds.com
+ * @copyright         2013 Rynoweb LLC
+ * @license           GPL-2.0-or-later
+ *
+ * Plugin Name:       Filter Admin Published Default
+ * Plugin URI:        https://github.com/chuckreynolds/wp-filter-admin-published-default
+ * Description:       Enables all public post types (posts, pages, etc) in wp-admin to show the Published filter by default.
+ * Version:           2.0.0
+ * Requires at least: 5.2
+ * Author:            Chuck Reynolds
+ * Author URI:        https://chuckreynolds.com
+ * Text Domain:       filter-admin-published-default
+ * License:           GPLv2 or later
+ * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  */
 
 // If this file is called directly, abort.
-defined( 'ABSPATH' ) or die;
+if ( ! defined( 'WPINC' ) ) {
+	die;
+}
+
+// Only run plugin in the admin
+if ( ! is_admin() ) {
+	return;
+}
 
 /**
- * change the default URL for post types
- * to only show published items
+ * Change the default URL for post types to only show published items.
  *
- * @return [mixed]  updated URLs in the $submenu items
+ * @return void
  */
-function rkv_filter_admin_published_default() {
-	// get our types
-	$types = rkv_fetch_post_types();
+function chuck_filter_admin_published_default() {
+	$types = chuck_fetch_post_types();
 
-	// bail if nothing comes back
 	if ( empty( $types ) ) {
 		return;
 	}
 
-	// ensure our types is indeed an array
-	$types	= ! is_array( $types ) ? (array) $types : $types;
-
-	// call global submenu item
 	global $submenu;
 
-	// loop our types and adjust the URL
-	foreach( $types as $type ) {
-		// handle post on its own since the type is
-		// not declared in the $submenu string
-		if ( $type == 'post' ) {
-			// edit main link for posts
+	foreach ( $types as $type ) {
+		// Posts use a different submenu key than other post types.
+		if ( 'post' === $type ) {
 			$submenu['edit.php'][5][2] = 'edit.php?post_status=publish';
 		} else {
-			// edit main link for all other types
-			$submenu['edit.php?post_type=' . esc_attr( $type ) ][5][2] = 'edit.php?post_type=' . esc_attr( $type ) . '&post_status=publish';
+			$submenu[ 'edit.php?post_type=' . esc_attr( $type ) ][5][2] = 'edit.php?post_type=' . esc_attr( $type ) . '&post_status=publish';
 		}
 	}
-
 }
-add_action ( 'admin_menu', 'rkv_filter_admin_published_default', 20 );
+add_action( 'admin_menu', 'chuck_filter_admin_published_default', 20 );
 
 /**
- * fetch all public post types and filter
+ * Fetch all public post types.
  *
- * @return [array]  post types for inclusion
+ * @return array Post type names.
  */
-function rkv_fetch_post_types() {
-	// set array of our default to include posts and pages
+function chuck_fetch_post_types() {
 	$types = array( 'post', 'page' );
 
-	// set args for looking up custom post types
-	$args = array(
-		'public'    => true,
-		'_builtin'  => false
+	$custom = get_post_types(
+		array(
+			'public'   => true,
+			'_builtin' => false,
+		),
+		'names',
+		'and'
 	);
 
-	// call our types
-	$custom = get_post_types( $args, 'names', 'and' );
-
-	// if no custom types exist, just return our defaults
-	if ( empty( $custom ) ) {
-		return $types;
+	if ( ! empty( $custom ) ) {
+		$types = array_merge( $types, $custom );
 	}
 
-	// merge our CPTs with the normal
-	$types = array_merge( $types, $custom );
-
-	// return it filtered
-	return apply_filters( 'rkv_admin_publish_link_types', $types );
+	/**
+	 * Filter the post types that get the published default in wp-admin.
+	 *
+	 * @param array $types Post type names.
+	 */
+	return apply_filters( 'chuck_admin_publish_link_types', $types );
 }

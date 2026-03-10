@@ -1,10 +1,10 @@
 === Filter Admin Published Default ===
 Contributors: ryno267, norcross
 Donate link:
-Tags: wordpress, admin, published, edit link, posts edit, pages edit
-Requires at least: 3.8
-Tested up to: 4.9
-Stable tag: 1.3
+Tags: admin, published, edit link, posts edit, pages edit
+Requires at least: 5.2
+Tested up to: 6.9.1
+Stable tag: 2.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,6 +31,14 @@ Installing "Filter Admin Published Default" can be done either by searching for 
 
 == Changelog ==
 
+= 2.0.0 =
+* 2026-03-09
+* Tested and compatible with WordPress 6.9.1
+* Requires WordPress 5.2+
+* Fixed: `chuck_admin_publish_link_types` filter now applies even when no custom post types are registered
+* Removed redundant type-casting code
+* Code cleanup and modernization
+
 = 1.3 =
 * 2017-11-14
 * tested to wp 4.9
@@ -48,7 +56,7 @@ Installing "Filter Admin Published Default" can be done either by searching for 
 = 1.0.1 =
 * 2014-09-25
 * Expanded to include all public post types excluding attachments (media)
-* Adds `rkv_admin_publish_link_types` filter to add / remove types
+* Adds `chuck_admin_publish_link_types` filter to add / remove types
 
 = 1.0 =
 * 2014-07-28
@@ -56,6 +64,6 @@ Installing "Filter Admin Published Default" can be done either by searching for 
 
 == Upgrade Notice ==
 
-= 1.0 =
-* 2014-07-28
-* Initial release
+= 2.0.0 =
+* 2026-03-09
+* Compatibility update for modern WordPress (5.0+). Filter fix for default post types.
