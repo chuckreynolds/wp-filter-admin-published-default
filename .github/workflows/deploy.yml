@@ -19,4 +19,3 @@ jobs:
           SVN_USERNAME: ${{ secrets.WORDPRESS_USERNAME }}
           SVN_PASSWORD: ${{ secrets.WORDPRESS_PASSWORD }}
           SLUG: filter-admin-published-default
-          ASSETS_DIR: assets

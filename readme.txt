@@ -3,8 +3,8 @@ Contributors: ryno267, norcross
 Donate link:
 Tags: admin, published, edit link, posts edit, pages edit
 Requires at least: 5.2
-Tested up to: 6.9.1
-Stable tag: 2.0.0
+Tested up to: 7.0.2
+Stable tag: 2.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -30,6 +30,11 @@ Installing "Filter Admin Published Default" can be done either by searching for 
 1. How does it work? Just install, activate, and you're good!
 
 == Changelog ==
+
+= 2.0.1 =
+* Fix URL escaping to use rawurlencode() instead of esc_attr()
+* Strengthen direct access guard with ABSPATH check
+* Remove redundant empty check
 
 = 2.0.0 =
 * 2026-03-09
@@ -63,6 +68,9 @@ Installing "Filter Admin Published Default" can be done either by searching for 
 * Initial release after twitter conversation: https://twitter.com/ChuckReynolds/status/493933761851965443
 
 == Upgrade Notice ==
+
+= 2.0.1 =
+* Security and code quality fixes.
 
 = 2.0.0 =
 * 2026-03-09
