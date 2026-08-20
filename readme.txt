@@ -5,15 +5,17 @@ Tags: admin, published, edit link, posts edit, pages edit
 Requires at least: 5.2
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 2.0.3
+Stable tag: 2.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Enables all public post types (posts, pages, etc) in wp-admin to show the Published filter by default.
+Enables all public post types (posts, pages, and any CPT with a public URL) in wp-admin to show the Published filter by default.
 
 == Description ==
 
-Enables all public post types (posts, pages, etc) in wp-admin to show the Published filter by default. This came out of a need as some clients of mine had a lot of pre-scheduled posts so a LOT of drafts are up top and I got tired of the extra click to filter by published. I tweeted out for ideas and @Norcross answered and quickly whipped up this; which we turned into a plugin for public release and here you go!
+Enables all public post types in wp-admin to show the Published filter by default: posts, pages, and any custom post type with a public URL. Those are the post types where the distinction actually matters, the ones with a front end, where you want to see at a glance what is live and what is not.
+
+This came out of a real need. Some clients of mine had so many drafts and pre-scheduled posts that the published ones were pushed off the first page entirely, and finding a live post meant paginating through drafts to get to it. I got tired of the extra click to filter by published every single time. I tweeted out for ideas and @Norcross answered and quickly whipped up this; which we turned into a plugin for public release and here you go!
 
 == Usage ==
 
@@ -32,7 +34,7 @@ Installing "Filter Admin Published Default" can be done either by searching for 
 
 == Changelog ==
 
-= 2.0.3 =
+= 2.1.0 =
 * Fixed a fatal error. The `chuck_admin_publish_link_types` filter is public, and a callback returning a non-string post type reached `rawurlencode()`, which throws a TypeError on PHP 8 and took down every admin page with a white screen. Filter output is now validated before use.
 * The "All items" link is now located by matching its URL instead of assuming submenu index 5. Index 5 is core's convention, not a contract, so a plugin that reorders the submenu could previously cause the wrong link to be rewritten.
 * A link another plugin has already repointed is now left alone instead of being overwritten.
@@ -80,7 +82,7 @@ Installing "Filter Admin Published Default" can be done either by searching for 
 
 == Upgrade Notice ==
 
-= 2.0.3 =
+= 2.1.0 =
 * Fixes a fatal error that could white-screen wp-admin when another plugin uses the chuck_admin_publish_link_types filter. Recommended for everyone.
 
 = 2.0.2 =

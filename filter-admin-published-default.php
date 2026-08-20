@@ -11,7 +11,7 @@
  * Plugin Name:       Filter Admin Published Default
  * Plugin URI:        https://github.com/chuckreynolds/wp-filter-admin-published-default
  * Description:       Enables all public post types (posts, pages, etc) in wp-admin to show the Published filter by default.
- * Version:           2.0.3
+ * Version:           2.1.0
  * Requires at least: 5.2
  * Requires PHP:      7.4
  * Author:            Chuck Reynolds
