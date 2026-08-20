@@ -11,7 +11,7 @@
  * Plugin Name:       Filter Admin Published Default
  * Plugin URI:        https://github.com/chuckreynolds/wp-filter-admin-published-default
  * Description:       Enables all public post types (posts, pages, etc) in wp-admin to show the Published filter by default.
- * Version:           2.0.1
+ * Version:           2.0.2
  * Requires at least: 5.2
  * Author:            Chuck Reynolds
  * Author URI:        https://chuckreynolds.com
@@ -43,11 +43,22 @@ function chuck_filter_admin_published_default() {
 	foreach ( $types as $type ) {
 		// Posts use a different submenu key than other post types.
 		if ( 'post' === $type ) {
-			$submenu['edit.php'][5][2] = 'edit.php?post_status=publish';
+			$menu_key = 'edit.php';
+			$link     = 'edit.php?post_status=publish';
 		} else {
-			$encoded = rawurlencode( $type );
-			$submenu[ 'edit.php?post_type=' . $encoded ][5][2] = 'edit.php?post_type=' . $encoded . '&post_status=publish';
+			$encoded  = rawurlencode( $type );
+			$menu_key = 'edit.php?post_type=' . $encoded;
+			$link     = 'edit.php?post_type=' . $encoded . '&post_status=publish';
 		}
+
+		// Only rewrite a link WordPress actually registered. Post types that are
+		// public but hidden from the admin menu have no submenu entry, and writing
+		// to one fabricates a malformed item with no title and no capability.
+		if ( ! isset( $submenu[ $menu_key ][5][2] ) ) {
+			continue;
+		}
+
+		$submenu[ $menu_key ][5][2] = $link;
 	}
 }
 add_action( 'admin_menu', 'chuck_filter_admin_published_default', 20 );

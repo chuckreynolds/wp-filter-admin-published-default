@@ -3,8 +3,8 @@ Contributors: ryno267, norcross
 Donate link:
 Tags: admin, published, edit link, posts edit, pages edit
 Requires at least: 5.2
-Tested up to: 7.0.2
-Stable tag: 2.0.1
+Tested up to: 7.1
+Stable tag: 2.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -30,6 +30,10 @@ Installing "Filter Admin Published Default" can be done either by searching for 
 1. How does it work? Just install, activate, and you're good!
 
 == Changelog ==
+
+= 2.0.2 =
+* Tested up to WordPress 7.1
+* Fixed: post types that are public but hidden from the admin menu no longer get a malformed submenu entry fabricated for them. Writing to a menu key WordPress never registered created an item with no title and no capability, which polluted the global admin menu for anything that walks it.
 
 = 2.0.1 =
 * Fix URL escaping to use rawurlencode() instead of esc_attr()
@@ -68,6 +72,9 @@ Installing "Filter Admin Published Default" can be done either by searching for 
 * Initial release after twitter conversation: https://twitter.com/ChuckReynolds/status/493933761851965443
 
 == Upgrade Notice ==
+
+= 2.0.2 =
+* Tested on WordPress 7.1. Fixes malformed admin menu entries for public post types that are hidden from the menu.
 
 = 2.0.1 =
 * Security and code quality fixes.
