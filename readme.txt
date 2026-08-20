@@ -15,7 +15,7 @@ Enables all public post types (posts, pages, and any CPT with a public URL) in w
 
 Enables all public post types in wp-admin to show the Published filter by default: posts, pages, and any custom post type with a public URL. Those are the post types where the distinction actually matters, the ones with a front end, where you want to see at a glance what is live and what is not.
 
-This came out of a real need. Some clients of mine had so many drafts and pre-scheduled posts that the published ones were pushed off the first page entirely, and finding a live post meant paginating through drafts to get to it. I got tired of the extra click to filter by published every single time. I tweeted out for ideas and @Norcross answered and quickly whipped up this; which we turned into a plugin for public release and here you go!
+This came out of a real need. Some clients of mine had so many drafts and pre-scheduled posts that the published ones were pushed off the first page entirely, and finding a live post meant paginating through drafts to get to it. I got tired of the extra click to filter by published every single time.
 
 == Usage ==
 
