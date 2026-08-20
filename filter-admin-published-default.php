@@ -11,8 +11,9 @@
  * Plugin Name:       Filter Admin Published Default
  * Plugin URI:        https://github.com/chuckreynolds/wp-filter-admin-published-default
  * Description:       Enables all public post types (posts, pages, etc) in wp-admin to show the Published filter by default.
- * Version:           2.0.2
+ * Version:           2.0.3
  * Requires at least: 5.2
+ * Requires PHP:      7.4
  * Author:            Chuck Reynolds
  * Author URI:        https://chuckreynolds.com
  * Text Domain:       filter-admin-published-default
@@ -38,27 +39,44 @@ if ( ! is_admin() ) {
 function chuck_filter_admin_published_default() {
 	$types = chuck_fetch_post_types();
 
+	// chuck_admin_publish_link_types is public, so a third-party callback can
+	// hand back anything. Bad input used to reach rawurlencode() and take the
+	// whole admin down with a TypeError on PHP 8.
+	if ( ! is_array( $types ) ) {
+		return;
+	}
+
 	global $submenu;
 
 	foreach ( $types as $type ) {
-		// Posts use a different submenu key than other post types.
-		if ( 'post' === $type ) {
-			$menu_key = 'edit.php';
-			$link     = 'edit.php?post_status=publish';
-		} else {
-			$encoded  = rawurlencode( $type );
-			$menu_key = 'edit.php?post_type=' . $encoded;
-			$link     = 'edit.php?post_type=' . $encoded . '&post_status=publish';
-		}
-
-		// Only rewrite a link WordPress actually registered. Post types that are
-		// public but hidden from the admin menu have no submenu entry, and writing
-		// to one fabricates a malformed item with no title and no capability.
-		if ( ! isset( $submenu[ $menu_key ][5][2] ) ) {
+		if ( ! is_string( $type ) || '' === $type ) {
 			continue;
 		}
 
-		$submenu[ $menu_key ][5][2] = $link;
+		// Posts use a different submenu key than other post types.
+		$menu_key = ( 'post' === $type )
+			? 'edit.php'
+			: 'edit.php?post_type=' . rawurlencode( $type );
+
+		// Post types that are public but hidden from the admin menu have no
+		// submenu at all. Writing to one fabricates a malformed item with no
+		// title and no capability, so leave those alone.
+		if ( empty( $submenu[ $menu_key ] ) || ! is_array( $submenu[ $menu_key ] ) ) {
+			continue;
+		}
+
+		// Rewrite the item that points at the unfiltered list, wherever it sits.
+		// Core puts it at index 5, but that is its convention rather than a
+		// contract. Matching on the slug also means a link another plugin has
+		// already repointed is left as they set it.
+		foreach ( $submenu[ $menu_key ] as $index => $item ) {
+			if ( ! isset( $item[2] ) || $menu_key !== $item[2] ) {
+				continue;
+			}
+
+			$submenu[ $menu_key ][ $index ][2] = add_query_arg( 'post_status', 'publish', $menu_key );
+			break;
+		}
 	}
 }
 add_action( 'admin_menu', 'chuck_filter_admin_published_default', 20 );
